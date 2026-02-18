@@ -33,7 +33,7 @@ Virus - Influenza A Virus
 
 **Prototype data plan:**
 
-I will use a subset of the host coding sequences (about 50) and 2-3 viral genes for testing and debugging. This allows for debugging and testing. 
+I will use a subset of the host coding sequences (about 50) and 2-3 viral genes for testing and debugging.
 
 Once the algorithm is validated with the prototype data, it can be scaled up to the full human coding sequence dataset and the full viral gene set.
 
@@ -45,13 +45,13 @@ Success for my project is being able to determine whether specific viral genes o
 2. Transition probability matrix between hidden states.
 3. Comparative analysis of adaptation levels of the different viral genes.
 
-One way to check if my result is reasonable is to decode a sample of the host coding sequences as well as a set of random or unrelated sequences under the HMM. Host coding sequences should mostly be classified as adapted while the unrelated sequences should show a lower proportion of adapted states.
+One way to check if my result is reasonable is to test a sample of the host coding sequences as well as a set of random or unrelated sequences under the HMM. Host coding sequences should mostly be classified as adapted while the unrelated sequences should show a lower proportion of adapted states.
 
 # Pitfall Scan
 ## Data-related Issues
 1. Incomplete or low-quality host CDS and errors in viral gene annotations
 + Some of the host coding sequences might have errors or be too short and some viral genomes could be missing or mislabeled in annotation files.
-+ Mitigation: Filter the host coding sequences for a minimum length and check sequence quality, and use curated reference genomes and verify annotations.
++ Mitigation: Filter the host coding sequences for a minimum length and check sequence quality, use curated reference genomes and verify annotations.
 
 ## Algorithmic Issues
 1. Zero-probability emissions
@@ -61,7 +61,7 @@ One way to check if my result is reasonable is to decode a sample of the host co
 ## Evaluation Issues
 1. Viral gene adaptation isn't known
 + We don't actually know the codon adaptation levels of the different viral genes.
-+ Mitigation: Validate model by testing with a sample of host CDS sequences and a random sample of sequences.
++ Mitigation: Validate results by testing with a sample of host CDS sequences and a random sample of sequences.
 
 # Planned Repository Structure (Initial Sketch)
 ```
