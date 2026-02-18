@@ -49,10 +49,43 @@ One way to check if my result is reasonable is to score a sample of the host cod
 
 # 5. Pitfall Scan
 ## Data-related Issues
+1. Incomplete or low-quality host CDS
++ Some host coding sequences may have errors or be too short.
++ Mitigation: Filter for a minimum length and check sequence quality.
+
+2. Errors in viral gene annotations
++ Some viral genes may be missing or mislabeled.
++ Mitigation: Use curated reference genomes and check annotations.
+
+3. Limited viral samples
++ Using only a few strains may not show overall diversity of the virus.
++ Mitigation: Start with on strain for testing and then expand.
 
 ## Algorithmic Issues
+1. Zero-probability codon transitions
++ Rare codon pairs may have zero probability, making log-likelihood undefined.
++ Mitigation: Add pseudocounts to all codon transitions when building the model
+
+2. Overfitting to host dataset
++ The model may reflect only the specific host sequences used.
++ Mitigation: Cross check log-likelihood scores with a random sample of host CDS and eventually use the complete host CDS to train the model.
+
+3. Computational limit
++ Large datasets can be difficult to handle.
++ Mitigation: Test on small subsets of data first and use efficient data structures for transition probabilities.
 
 ## Evaluation Issues
+1. Viral gene adaptation isn't known
++ We don't actually know the codon adaptation levels of the different viral genes.
++ Mitigation: Validate model by testing with a sample of host CDS sequences and a random sample of sequences.
+
+2. Sequence length effects
++ Longer genes may get higher scores because they are longer.
++ Mitigation: Normallize scores by gene length
+
+3. Other biological factors
++ Overlapping genes or RNA structures can affect codon usage, which may change scores.
++ Focus on overall trends across genes and interpret atypical scores carefully.
 
 # 6. Planned Repository Structure (Initial Sketch)
 ```
@@ -71,4 +104,4 @@ final_project/
 
 # 7. Generative AI Disclosure (If Used)
 
-
+NA
