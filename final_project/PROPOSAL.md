@@ -3,7 +3,7 @@ Identification of Gene-Specific Codon Adaptation of Influenza A to the Human Hos
 
 # 2. Research Question
 Do all genes of the Influenza A virus show the same level of adaptation to human codon usage or do different functional gene groups exhibit different levels of host-specific codon adaptation?
-## Why this matters
+
 Viruses depend on host translational machinery to produce their proteins. Since translational efficiency can be influenced by codon usage, viral genes that match human codon preferences better may be translated more efficiently. While overall viral codon usage adaptation has been studied, gene-level heterogeneity within the viral genome is less explored. 
 
 Understanding whether codon adaptation varies by gene function could provide information about how a virus balances replication efficiency, immune evasion and evolutionary flexibility. Successfully identifying differences in host codon adaptation among viral genes could also provide insights into newly sequenced viruses whose genes have very little experimental information.
