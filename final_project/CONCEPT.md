@@ -145,7 +145,8 @@ Algorithm overview:
              convert the sequence into a list of codons, observations       # call split_into_codons function here
              run viterbi on the observations        # call viterbi function here
              compute adaptation score for gene      # call adaptation score function here
-             store gene id, state sequence and adaptation score in a dictionary, {gene_id:(state_sequence, adaptation_score)}
+             store gene id, state sequence and adaptation score in a dictionary, viral_genes_results = {gene_id:(state_sequence, adaptation_score)}
+        return viral_genes_results
 
 8. Compute adaptation score:
     def adaptation_score(state_sequence)
