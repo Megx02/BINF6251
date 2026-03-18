@@ -4,6 +4,7 @@ The algorithm to be implemented for this project is the Viterbi algorithm from o
 This project will work with nucleotide sequence data:
 + FASTA file for host organism (Human) - human coding sequences (CDS), source: NCBI RefSeq
 + FASTA file for virus (Influenza A) - sequences from different genes, source: NCBI GenBank
+
 Human sequences will be used to estimate codon emission probabilities for adapted states and the viral gene sequences will be evaluated using the trained HMM.
 
 # Inputs, Outputs and Assumptions
@@ -39,7 +40,8 @@ Gene_C: 0.92
 ## Assumptions
 + All sequences contain only A, C, G and T and they are uppercase.
 + Sequences are of lengths that are mutliples of 3.
-+ Distribution of codons for not adapted state is uniform (1/64)
++ Distribution of codons for not adapted state is uniform (1/64).
++ Start, emission and transition probabilities are normalized.
 
 # Detailed Pseudocode
 ```
@@ -53,12 +55,12 @@ Algorithm overview:
 1. Load the human sequences from FASTA file
     def load_training_data(human_CDS_filename)
         Filter sequences based on length (should be a multiple of 3) and invalid characters (should only contain A, C, G and T)
-        Append sequences from human_CDS_filename to a list -> human_sequences
-        return list of sequences
+        Append sequences from human_CDS_filename to a list human_sequences
+        return human_sequences
 
 2. Split sequences into codons
     def split_into_codons(sequences)
-        Initialize an empty list to store the codons -> codons
+        Initialize an empty list codons to store codons
         For each sequence in the sequences:
             For i from 0 to len(sequence)-3, step 3:
                 codon = sequence[i: i+3]
@@ -67,63 +69,63 @@ Algorithm overview:
 
 3. Estimate codon emission probabilities from list of codons from human sequences
     def compute_emission_probabilities(human_codons)
-        Initialize a dictionary for all 64 codons with pseudocounts -> codon_counts[codon] = pseudocount
-
-        Get counts for each codon in the human sequence:
+        codon_counts[codon] = pseudocount   # Initialize a dictionary for all 64 codons with pseudocounts
+        
+        # Get counts for each codon in the human sequence:
         For codon in human_codons:  
             codon_counts[codon] += 1
         
         total_codons = sum of all codons in list of codons
         
-        Convert the counts to emission probabilities 
-            For each codon:
-                emission[adapted][codon] = codon_counts[codon]/total_codons
-                emission[not_adapted][codon] = 1/64 -> Assuming uniform distribution for non adapted state
+        # Convert the counts to emission probabilities and normalize
+        For each codon:
+            emission[adapted][codon] = log(codon_counts[codon]/total_codons)
+            emission[not_adapted][codon] = log(1/64) -> Assuming uniform distribution for non adapted state
         return emission
 
-4. Define HMM parameters -> this is a separate step in the process but doesn't need to be a separate function since it is just defining certain parameters
+4. Define HMM parameters    # this is a separate step in the process but doesn't need to be a separate function since it is just defining certain parameters
 
         states = {adapted, not_adapted}
         
         start_probabilities:
-        start[adapted] = 0.5
-        start[not_adapted] = 0.5
+        start[adapted] = log(0.5)
+        start[not_adapted] = log(0.5)
 
         transition probabilities:
-        transition[adapted][adapted] = 0.7
-        transition[adapted][not_adapted] = 0.3
-        transition[not_adapted][not_adapted] = 0.7
-        transition[not_adapted][adapted] = 0.3
+        transition[adapted][adapted] = log(0.7)
+        transition[adapted][not_adapted] = log(0.3)
+        transition[not_adapted][not_adapted] = log(0.7)
+        transition[not_adapted][adapted] = log(0.3)
 
 5. Viterbi algorithm   
     def viterbi(observations, states, transition, emission, start)
         N = length of observations
-        If N == 0: -> edge case
+        If N == 0:      # edge case
             return empty list for state sequence
 
-        create a matrix V[state][n] to store best log probabilities  
-        create a matrix T[state][n] to store best previous state
+        create a matrix V of size states x N to store best log probabilities  
+        create a matrix T of size states x N to store best previous state
 
         Initialization step (for the first codon):
             For each state s:
-                V[s][0] = log(start[s]) + log(emission[s][observations[0]]) -> start probability for the state and emission probability of the codon for that state
+                V[s][0] = start[s] + emission[s][observations[0]]   # start probability for the state and emission probability of the codon for that state
                 B[s][0] = None
         
         Recursion step:
             For n from 1 to N-1:
                 For each state s in states:
-                    Initialize best probability and best previous state
+                    # Initialize best probability and best previous state
                     best_prob = -infinity 
                     best_prev_state = None
 
-                    For each previous state p in states: -> we calculate the probability for all the possible states to see which is the optimal state
-                        prob = V[p][n-1] + log(transition[p][s]) + log(emission[s][observations[n]]) -> probability of the previous state, transition probability to current state and emission probability of the codon for the current state
+                    For each previous state p in states:    # we calculate the probability for all the possible states to see which is the optimal state
+                        prob = V[p][n-1] + transition[p][s] + emission[s][observations[n]] # probability of the previous state, transition probability to current state and emission probability of the codon for the current state
 
                         if prob > best_prob:
-                            Update the best probability and the current optimal state to become the best previous state
+                            # Update the best probability and the current optimal state to become the best previous state
                             best_prob = prob
                             best_prev_state = p
-                    Save the best probability and the best previous state in their respective matrices
+                    # Save the best probability and the best previous state in their respective matrices
                     V[s][n] = best_prob
                     B[s][n] = best_prev_state
 
@@ -134,30 +136,30 @@ Algorithm overview:
     def traceback(V, T, states, N)
         best_final_state = state with maximum V[state][N-1]
 
-        Initialize empty list to store path of states throughout the sequence -> state_sequence = []
+        state_sequence = []    # Initialize empty list to store path of states throughout the sequence 
         current_state = best_final_state
 
-        For n from N-1 to 0: -> going backwards since we traceback from the last state to get the optimal path
+        For n from N-1 to 0:    # going backwards since we traceback from the last state to get the optimal path
             Append current_state to state_sequence
-            current_state = T[current_state][n] -> this is where we stored the best previous state
+            current_state = T[current_state][n]     # this is where we stored the best previous state
         Reverse state_sequence (since we appended states starting from the final state)
         return state_sequence
 
 7. Load the viral genes from FASTA file, split the sequences into codons and run viterbi on each gene
     def viral_genes(virus_filename)
         Filter sequences based on length (should be a multiple of 3) and invalid characters (should only contain A, C, G and T)
-        viral_genes = dictionary -> {gene_id: sequence} from virus_filename
+        viral_genes = dictionary, {gene_id: sequence} from virus_filename
 
         For each gene in the viral_genes:
              sequence = viral_genes[gene_id]
-             convert the sequence into a list of codons -> observations -> call split_into_codons function here
-             run viterbi on the observations -> call viterbi function here
-             compute adaptation score for gene -> call adaptation score function here
-             store gene id, state sequence and adaptation score in a dictionary -> {gene_id:(state_sequence, adaptation_score)}
+             convert the sequence into a list of codons, observations       # call split_into_codons function here
+             run viterbi on the observations, call viterbi function here
+             compute adaptation score for gene, call adaptation score function here
+             store gene id, state sequence and adaptation score in a dictionary, {gene_id:(state_sequence, adaptation_score)}
 
 8. Compute adaptation score:
     def adaptation_score(state_sequence)
-        If state_sequence is an empty list: -> edge case
+        If state_sequence is an empty list:     # edge case
             adapted_proportion = None
         else:
             adapted_count = number of adapted states in state_sequence
