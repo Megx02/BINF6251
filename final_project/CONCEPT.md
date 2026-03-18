@@ -25,11 +25,13 @@ Human sequences will be used to estimate codon emission probabilities for adapte
 
 ## Output
 1. Sequence of states for each viral gene
+
 Example:
 ```
 Gene_A: Adapted, Adapted, Adapted, Not Adapted, Not Adapted ...
 ```
 2. Adaptation score per gene
+
 Example:
 ```
 Gene_A: 0.72
@@ -169,7 +171,7 @@ Algorithm overview:
 ```
 
 # Complexity and Bottlenecks
-With N = the number of codons, V = the number of viral genes, H = total number of codons in the host dataset and S = the number of states 
+With N = the number of codons (per viral gene), V = the number of viral genes, H = total number of codons in the host dataset and S = the number of states 
 
 Emission probability estimation:
 + Time Complexity: O(H) 
