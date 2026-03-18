@@ -97,12 +97,12 @@ Algorithm overview:
 
 5. Viterbi algorithm   
     def viterbi(observations, states, transition, emission, start)
-        T = length of observations
-        If T == 0: -> edge case
+        N = length of observations
+        If N == 0: -> edge case
             return empty list for state sequence
 
-        create a matrix V[state][t] to store best log probabilities  
-        create a matrix B[state][t] to store best previous state
+        create a matrix V[state][n] to store best log probabilities  
+        create a matrix T[state][n] to store best previous state
 
         Initialization step (for the first codon):
             For each state s:
@@ -110,36 +110,36 @@ Algorithm overview:
                 B[s][0] = None
         
         Recursion step:
-            For t from 1 to T-1:
+            For n from 1 to N-1:
                 For each state s in states:
                     Initialize best probability and best previous state
                     best_prob = -infinity 
                     best_prev_state = None
 
                     For each previous state p in states: -> we calculate the probability for all the possible states to see which is the optimal state
-                        prob = V[p][t-1] + log(transition[p][s]) + log(emission[s][observations[t]]) -> probability of the previous state, transition probability to current state and emission probability of the codon for the current state
+                        prob = V[p][n-1] + log(transition[p][s]) + log(emission[s][observations[n]]) -> probability of the previous state, transition probability to current state and emission probability of the codon for the current state
 
                         if prob > best_prob:
                             Update the best probability and the current optimal state to become the best previous state
                             best_prob = prob
                             best_prev_state = p
                     Save the best probability and the best previous state in their respective matrices
-                    V[s][t] = best_prob
-                    B[s][t] = best_prev_state
+                    V[s][n] = best_prob
+                    B[s][n] = best_prev_state
 
             call traceback function to get optimal state path
             return state_sequence
 
 6. Traceback
-    def traceback(V, B, states, T)
-        best_final_state = state with maximum V[state][T-1]
+    def traceback(V, T, states, N)
+        best_final_state = state with maximum V[state][N-1]
 
         Initialize empty list to store path of states throughout the sequence -> state_sequence = []
         current_state = best_final_state
 
-        For t from T-1 to 0: -> going backwards since we traceback from the last state to get the optimal path
+        For n from N-1 to 0: -> going backwards since we traceback from the last state to get the optimal path
             Append current_state to state_sequence
-            current_state = B[current_state][t] -> this is where we stored the best previous state
+            current_state = T[current_state][n] -> this is where we stored the best previous state
         Reverse state_sequence (since we appended states starting from the final state)
         return state_sequence
 
