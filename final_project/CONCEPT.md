@@ -72,12 +72,11 @@ Algorithm overview:
 3. Estimate codon emission probabilities from list of codons from human sequences
     def compute_emission_probabilities(human_codons)
         codon_counts[codon] = pseudocount   # Initialize a dictionary for all 64 codons with pseudocounts
-        
+        total_codons = len(human_codons)
+
         # Get counts for each codon in the human sequence:
         For codon in human_codons:  
             codon_counts[codon] += 1
-        
-        total_codons = sum of all codons in list of codons
         
         # Convert the counts to emission probabilities and normalize
         For each codon:
@@ -88,16 +87,8 @@ Algorithm overview:
 4. Define HMM parameters    # this is a separate step in the process but doesn't need to be a separate function since it is just defining certain parameters
 
         states = {adapted, not_adapted}
-        
-        start_probabilities:
-        start[adapted] = log(0.5)
-        start[not_adapted] = log(0.5)
-
-        transition probabilities:
-        transition[adapted][adapted] = log(0.7)
-        transition[adapted][not_adapted] = log(0.3)
-        transition[not_adapted][not_adapted] = log(0.7)
-        transition[not_adapted][adapted] = log(0.3)
+        start_probabilities: equally likely (0.5 for each state)
+        transition probabilities: (0.7 for staying in the same state, 0.3 for switching states)
 
 5. Viterbi algorithm   
     def viterbi(observations, states, transition, emission, start)
@@ -115,20 +106,17 @@ Algorithm overview:
         
         Recursion step:
             For n from 1 to N-1:
-                For each state s in states:
-                    # Initialize best probability and best previous state
-                    best_prob = -infinity 
+                For each state s in states: 
+                    best_prob = -infinity       # Initialize best probability and best previous state
                     best_prev_state = None
 
                     For each previous state p in states:    # we calculate the probability for all the possible states to see which is the optimal state
                         prob = V[p][n-1] + transition[p][s] + emission[s][observations[n]] # probability of the previous state, transition probability to current state and emission probability of the codon for the current state
 
                         if prob > best_prob:
-                            # Update the best probability and the current optimal state to become the best previous state
-                            best_prob = prob
+                            best_prob = prob    # Update the best probability and the current optimal state to become the best previous state
                             best_prev_state = p
-                    # Save the best probability and the best previous state in their respective matrices
-                    V[s][n] = best_prob
+                    V[s][n] = best_prob     # Save the best probability and the best previous state in their respective matrices
                     B[s][n] = best_prev_state
 
             call traceback function to get optimal state path
@@ -155,8 +143,8 @@ Algorithm overview:
         For each gene in the viral_genes:
              sequence = viral_genes[gene_id]
              convert the sequence into a list of codons, observations       # call split_into_codons function here
-             run viterbi on the observations, call viterbi function here
-             compute adaptation score for gene, call adaptation score function here
+             run viterbi on the observations        # call viterbi function here
+             compute adaptation score for gene      # call adaptation score function here
              store gene id, state sequence and adaptation score in a dictionary, {gene_id:(state_sequence, adaptation_score)}
 
 8. Compute adaptation score:
