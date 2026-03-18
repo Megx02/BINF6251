@@ -169,7 +169,7 @@ Algorithm overview:
 ```
 
 # Complexity and Bottlenecks
-With N = the number of codons, V = the number of viral genes, H = total number of codons in the host dataset and S = the number of states 
+With N = the number of codons (per viral gene), V = the number of viral genes, H = total number of codons in the host dataset and S = the number of states 
 
 Emission probability estimation:
 + Time Complexity: O(H) 
