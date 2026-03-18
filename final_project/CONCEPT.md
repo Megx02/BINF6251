@@ -24,11 +24,13 @@ Human sequences will be used to estimate codon emission probabilities for adapte
 
 ## Output
 1. Sequence of states for each viral gene
+
 Example:
 ```
 Gene_A: Adapted, Adapted, Adapted, Not Adapted, Not Adapted ...
 ```
 2. Adaptation score per gene
+
 Example:
 ```
 Gene_A: 0.72
