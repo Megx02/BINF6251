@@ -48,16 +48,12 @@ After downloading the data, run all the cells in `src/main.ipynb`.
 
 Output:
 Adaptation score and state sequence will be printed in the cell output for the corresponding gene ID.
+The expected output for analysis on `test.fa` is:
 ```
- {'h1': (1.0, 'AAAAAAAAAAAAAAAAAAAA'),
- 'h2': (0.95, 'AAAAAAAAAAAAAAAAAAAN'),
- 'h3': (1.0, 'AAAAAAAAAAAAAAAAAAAA'),
- 'h4': (1.0, 'AAAAAAAAAAAAAAAAAAAA'),
- 'h5': (1.0, 'AAAAAAAAAAAAAAAAAAAA'),
- 'h6': (1.0, 'AAAAAAAAAAAAAAAAAAAA'),
- 'h7': (0.85, 'AAAAAAAAAAAAAAAAANNN'),
- 'h8': (0.75, 'NNNNNAAAAAAAAAAAAAAA'), 
- ....
+{'Gene_1': (0.85, 'AAAAAAAAAAAAAAAAANNN'),
+ 'Gene_2': (0.75, 'NNNNNAAAAAAAAAAAAAAA'),
+ 'Gene_3': (0.25, 'AAAAANNNNNNNNNNNNNNN'),
+ 'Gene_4': (0.4, 'NNNNNNNNNNNNAAAAAAAA')}
  ```
 
 
