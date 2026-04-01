@@ -13,7 +13,7 @@ def adaptation_score(state_sequence):
 
     # Loop through the states and increase count for every "adapted" state
     for s in state_sequence:
-        if s == "adapted":
+        if s == "A":
             adapted_count += 1
 
     # Calculate fraction of adapted states
@@ -40,6 +40,6 @@ def analyze_genes(seq_dict, hmm):
         score = adaptation_score(states)
 
         # Store the score and sequence of states in a dictionary
-        results[gene_id] = (score, states)
+        results[gene_id] = (score, "".join(states))
     
     return results

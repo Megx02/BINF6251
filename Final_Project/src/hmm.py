@@ -60,5 +60,5 @@ class HMM:
         # Calculate emission probabilities for codons in "adapted" state from the codon counts
         # Set uniform emission probabilities for "not_adapted" state 
         for codon in all_codons:
-            self.emission_probs["adapted"][codon] = math.log(codon_counts[codon]/total_count)
-            self.emission_probs["not_adapted"][codon] = math.log(1.0/64.0)
+            self.emission_probs["A"][codon] = math.log(codon_counts[codon]/total_count)
+            self.emission_probs["N"][codon] = math.log(1.0/64.0)
