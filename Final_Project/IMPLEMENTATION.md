@@ -47,7 +47,7 @@ Since the prototype is generating synthetic data there is no input data file for
 After downloading the data, run all the cells in `src/main.ipynb`.
 
 Output:
-Adaptation score and state sequence will be printed in the cell output for the corresponding gene ID.
+Adaptation score and state sequence will be printed in the notebook cell output for the corresponding gene ID.
 The expected output for analysis on `test.fa` is:
 ```
 {'Gene_1': (0.85, 'AAAAAAAAAAAAAAAAANNN'),
@@ -58,8 +58,8 @@ The expected output for analysis on `test.fa` is:
 
 
 # Data Documentation
-+ Human CDS data was donwloaded from NCBI for training the HMM model and estimating emission probabilities.
-+ The Viterbi algorithm was tested on synthetic data - human like sequences were generated from the emission probabilities of the human data and random sequences were generated from an equal distribution of codon probabilities
++ Human CDS data was donwloaded from NCBI for training the HMM model and estimating emission probabilities. It is in the form of a FASTA file with sequences corresponding to coding regions in humans. 
++ The Viterbi algorithm was tested on synthetic data. I created a small test dataset (`data/test.fa`) which contains 4 synthetic sequences. I also have a function that generates 20 human like sequences from the emission probabilities of the human data and 20 random sequences from an equal distribution of codon probabilities for testing the analysis pipeline.
 
 Preprocessing:
 + All the sequences were filtered to make sure they contain only A, C, G and T and have a length divisible by 3.
@@ -76,8 +76,7 @@ I didn't run into major issues with the analysis portion, although I have only t
 
 
 # Next Steps
-For the final stage of the project, I have planned some imporvements and additions. The current output is pretty simple, with just the adaptation scores and state sequences for test data. I plan on having it produce more informative outputs when using viral data, such as statistics across genes, visualizations and more interpretable outputs that show patterns in adaptation. I am also looking for ways to extend the HMM with additional hidden states. 
-
-I will implement unit tests to verify teh individual functions of the algorithm and perform a stress test to evaluate the algorithm's performance. My initial validation was done with synthetic data, the next step is to run the algorithm on real Influenza A viral sequences and validate results to see if they are biologicaly meaningful and correct. This will include comparing adaptation patterns across genes and checking consistency with known biological insights. 
-
-I will imporve documentation to make the code easier to follow and create a Quick Start guide for users to run a working example of the project.
+For the final stage of the project, I have planned some imporvements and additions. 
++ The current output is pretty simple, with just the adaptation scores and state sequences for test data. I plan on having it produce more informative outputs when using viral data, such as statistics across genes, maybe some visualizations and more interpretable outputs that show patterns in adaptation. I am also looking for ways to extend the HMM with additional hidden states. 
++ I will implement unit tests to verify teh individual functions of the algorithm and perform a stress test to evaluate the algorithm's performance. My initial validation was done with synthetic data, the next step is to run the algorithm on real Influenza A viral sequences and validate results to see if they are biologicaly meaningful and correct. This will include comparing adaptation patterns across genes and checking consistency with known biological insights. 
++ I will imporve documentation to make the code easier to follow and create a Quick Start guide for users to run a working example of the project.
