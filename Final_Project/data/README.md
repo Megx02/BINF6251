@@ -19,7 +19,7 @@ The notebook `src/main.ipynb` contains a function to generate synthetic sequence
 + There is a code cell that runs analysis on these sequences as well.
 + No random seed is set, so new sequences will be generated each time.
 
-This is the code I used to generate the sequence:
+This is the code I used to generate the sequences:
 ```
 def generate_sample_sequence(codons, probs, n):
     return "".join(random.choices(codons, weights=probs, k=n))
