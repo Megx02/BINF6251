@@ -40,6 +40,7 @@ To run the prototype on synthetic data:
 First the human CDS sequences need to be downloaded following the instructions in `data/README.md`.
 + The input file expected is `GCF_000001405.40_GRCh38.p14_cds_from_genomic.fna.gz`.
 + This is the data file that will be used to train the model.
++ If you want to test with different training data you can change the filename in `src/main.ipynb` to the path to your file.
 
 Since the prototype is generating synthetic data there is no input data file for the Viterbi algorithm and analysis right now. Instead there is a function to generate synthetic data in the notebook with the driver program `src/main.ipynb`.
 
@@ -47,6 +48,17 @@ After downloading the data, run all the cells in `src/main.ipynb`.
 
 Output:
 Adaptation score and state sequence will be printed in the cell output for the corresponding gene ID.
+```
+ {'h1': (1.0, 'AAAAAAAAAAAAAAAAAAAA'),
+ 'h2': (0.95, 'AAAAAAAAAAAAAAAAAAAN'),
+ 'h3': (1.0, 'AAAAAAAAAAAAAAAAAAAA'),
+ 'h4': (1.0, 'AAAAAAAAAAAAAAAAAAAA'),
+ 'h5': (1.0, 'AAAAAAAAAAAAAAAAAAAA'),
+ 'h6': (1.0, 'AAAAAAAAAAAAAAAAAAAA'),
+ 'h7': (0.85, 'AAAAAAAAAAAAAAAAANNN'),
+ 'h8': (0.75, 'NNNNNAAAAAAAAAAAAAAA'), 
+ ....
+ ```
 
 
 # Data Documentation
@@ -56,16 +68,20 @@ Adaptation score and state sequence will be printed in the cell output for the c
 Preprocessing:
 + All the sequences were filtered to make sure they contain only A, C, G and T and have a length divisible by 3.
 
-
+Since I haven't used real data for the analysis at this stage, the ground truth is based on the process of generation of the synthetic data. Sequences generated using human codon emission probabilities are treated as havign a higher number of adapted states while sequences from a uniform codon distribution are treated as having a relatively lower number of adapted states. 
 
 
 # Initial Observations
-
-
+So far the algorithm has given me expected results for the synthetic data. The human-like sequences gave me an average adaptation score between 0.6 and 0.9 during my different test runs and the random sequences gave me average scores between 0.1 and 0.5. I performed a t-test to compare the adaptation scores of the two groups and got a p-value less than 0.05 indicating that the difference between them is statistically significant. This indicates that the algorithm is able to differentiate between human-like and random sequences based on codon usage pattern. 
 
 
 # Reflection on Changes and Challenges
-
+I didn't run into major issues with the analysis portion, although I have only tested with one set of transition probabilities and pseudocount so I will need to test with other values to see what gives me the most significant results. I also have a relatively simple model that uses only two hidden states right now, I am looking for ways to increase the number of states and observe if that makes results even more signifcant. My main issue was with training the HMM, the FASTA file I used to train the model was quite large and I had initially written the code such that it parsed the file, stored all the sequences in a list, split the sequences into codons and stored those in a list and then counted the codons for the emission probabilities. This caused issues with memory. I realized I only needed the codon counts for the emission probabilities and the actual sequences and codons from it don't need to be stored so I modified the code to directly count the codons while parsing the file. 
 
 
 # Next Steps
+For the final stage of the project, I have planned some imporvements and additions. The current output is pretty simple, with just the adaptation scores and state sequences for test data. I plan on having it produce more informative outputs when using viral data, such as statistics across genes, visualizations and more interpretable outputs that show patterns in adaptation. I am also looking for ways to extend the HMM with additional hidden states. 
+
+I will implement unit tests to verify teh individual functions of the algorithm and perform a stress test to evaluate the algorithm's performance. My initial validation was done with synthetic data, the next step is to run the algorithm on real Influenza A viral sequences and validate results to see if they are biologicaly meaningful and correct. This will include comparing adaptation patterns across genes and checking consistency with known biological insights. 
+
+I will imporve documentation to make the code easier to follow and create a Quick Start guide for users to run a working example of the project.
