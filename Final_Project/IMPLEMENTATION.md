@@ -42,13 +42,15 @@ First the human CDS sequences need to be downloaded following the instructions i
 + This is the data file that will be used to train the model.
 + If you want to test with different training data you can change the filename in `src/main.ipynb` to the path to your file.
 
-Since the prototype is generating synthetic data there is no input data file for the Viterbi algorithm and analysis right now. Instead there is a function to generate synthetic data in the notebook with the driver program `src/main.ipynb`.
+I have included a small test dataser (`data/test.fa`) to test the analysis pipeline. This contains 4 synthetic sequences I made for testing purposes. I also have a function in the notebook that generates a dictionary of human-like and random sequences for testing the analysis. 
+
+The training data and test dataset are hardcoded in the notebook, so if you are testing with other input files, change the file path to you file. The generated dictionary for testing is not a separate data file, it is generated within the notebook itself.
 
 After downloading the data, run all the cells in `src/main.ipynb`.
 
 Output:
 Adaptation score and state sequence will be printed in the notebook cell output for the corresponding gene ID.
-The expected output for analysis on `test.fa` is:
+The expected output for analysis on `data/test.fa` is:
 ```
 {'Gene_1': (0.85, 'AAAAAAAAAAAAAAAAANNN'),
  'Gene_2': (0.75, 'NNNNNAAAAAAAAAAAAAAA'),
