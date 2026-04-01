@@ -70,7 +70,7 @@ Since I haven't used real data for the analysis at this stage, the ground truth 
 
 
 # Initial Observations
-So far the algorithm has given me expected results for the synthetic data. The human-like sequences gave me an average adaptation score between 0.6 and 0.9 during my different test runs and the random sequences gave me average scores between 0.1 and 0.5. I performed a t-test to compare the adaptation scores of the two groups and got a p-value less than 0.05 indicating that the difference between them is statistically significant. This indicates that the algorithm is able to differentiate between human-like and random sequences based on codon usage pattern. 
+So far the algorithm has given me expected results for the synthetic data. The human-like sequences gave me an average adaptation score between 0.6 and 0.9 during my different test runs and the random sequences gave me average scores between 0.1 and 0.5. I performed a t-test to compare the adaptation scores of the two groups and got a p-value less than 0.05 indicating that the difference between them is statistically significant. This indicates that the algorithm is able to differentiate between human-like and random sequences based on codon usage pattern. I did have issues during runtime while training the model becuase of the large input file but I was able to fix that as explained in the next section (Reflection on Changes and Challenges). I think I will face more issues with agorithm behaviour once I start tetsing with different probabilities, pseudocounts and number of hidden states, but for now the core logic of the algorithm I implemented works as expected.
 
 
 # Reflection on Changes and Challenges
