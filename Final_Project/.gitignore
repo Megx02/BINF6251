@@ -1,0 +1,15 @@
+# Python bytecode
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# VS Code workspace settings
+.vscode/
+
+# Jupyter notebook checkpoints (if any)
+.ipynb_checkpoints/
+
+# Logs and temporary files
+*.log
+*.tmp
