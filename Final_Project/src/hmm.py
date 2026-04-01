@@ -1,6 +1,5 @@
 import math
 from src.utils import *
-from collections import defaultdict
 
 
 class HMM:
