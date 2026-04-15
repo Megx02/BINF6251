@@ -1,8 +1,15 @@
 ## Full Human CDS sequences (for HMM training)
 The human CDS dataset from NCBI is required to train the HMM emission probabilities:
 + File: `GCF_000001405.40_GRCh38.p14_cds_from_genomic.fna.gz`
-+ This file is already committed in `data/`, but if you would like to download it from NCBI use: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/001/405/GCF_000001405.40_GRCh38.p14/ 
-+ The notebook `src/main.ipynb` has the file path hard coded, so it will automatically use this file to train the HMM before analysis.
++ This file is already available in `data/`, but if you would like to download it from NCBI use: https://ftp.ncbi.nlm.nih.gov/genomes/all/GCF/000/001/405/GCF_000001405.40_GRCh38.p14/ 
+
+
+
+## Viral gene sequences (for analysis)
+This is the file that the Viterbi algorithm is run on:
++ `influenza_A_genes.txt` contains the sequences of each gene from the Influenza A virus, specifically Influenza A virus (H1N1) A/Iwate/1130/2009. 
++ This file is already available in `data/`, but if you would like to download it from NCBI use: https://www.ncbi.nlm.nih.gov/nuccore/?term=Influenza+A+virus+(H1N1)+A%2FIwate%2F1130%2F2009 . Select all the hits that contain the complete CDS of a gene from this virus (some hits have two genes grouped together). Once selected, they can all be dowloaded together as one file despite being separate hits. The download will be a `.txt` file but it will contain sequences in the FASTA format so it will work in this program.
++ Similarly, gene sequence data from other viruses can be saved in a file and used in this project. 
 
 
 ## Small test dataset (for analysis)
@@ -10,11 +17,11 @@ The human CDS dataset from NCBI is required to train the HMM emission probabilit
 
 **To run analysis on this dataset:**
 + Make sure the HMM has been trained on the human CDS dataset.
-+ Run the "Small test dataset" cell in the notebook `src/main.ipynb`.
++ Run the "Small test dataset" cell in the notebook `src/test.ipynb`.
 
 
 ## Generating synthetic data (for analysis)
-The notebook `src/main.ipynb` contains a function to generate synthetic sequences:
+The notebook `src/test.ipynb` contains a function to generate synthetic sequences:
 + It will generate 20 human-like and 20 random sequences.
 + There is a code cell that runs analysis on these sequences as well.
 + No random seed is set, so new sequences will be generated each time.
