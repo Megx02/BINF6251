@@ -60,10 +60,14 @@ def main():
                                 type=int,
                                 default=2,
                                 help="Number of Viterbi paths to output")
-    analyze_parser.add_argument("--output-file",
+    analyze_parser.add_argument("--analysis_report",
                                 type=str,
                                 default="results/results.txt",
-                                help="Path to file to store results")
+                                help="Path to file to store analysis results")
+    analyze_parser.add_argument("--ranked_genes",
+                                type=str,
+                                default="results/ranked_genes.txt",
+                                help="Path to file to store ranked genes")
 
 
 
@@ -103,12 +107,12 @@ def main():
         
         print("Saving results to output file...")
         # Store results to output file
-        save_results(results, args.output_file)
+        save_results(results, args.analysis_report)
 
         print(f"Scoring results saved to {args.output_file}")
 
         # Rank genes a write results to file
-        write_genes_ranked_in_order(results, "results/ranked_genes.txt")
+        write_genes_ranked_in_order(results, args.ranked_genes)
         print("Ranked gene results saved to results/ranked_genes.txt")
         
     

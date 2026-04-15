@@ -81,9 +81,10 @@ From `Final_Project`, to analyze viral data run:
 python -m src.main analyze
 ```
 Inputs (with defaults):
-+ `analysis_data`: Gene sequences of virus that you want to score for adaptation (default: `data/influenza_A_genes.txt`)
++ `analysis_data`: Path to file containing gene sequences of virus that you want to score for adaptation (default: `data/influenza_A_genes.txt`)
 + `num_paths`: number of top paths to return from the Viterbi algorithm (default: `2`)
 + `output_file`: output filename to store the scoring results of all the genes (default: `results/results.txt`)
++ `ranked_genes`: Path to file to store ranked genes (default: `results/ranked_genes.txt`)
 
 ### Help:
 To see all the configurable arguments:
@@ -145,7 +146,7 @@ This notebook runs the algorithm on two synthetic sets of sequences, one generat
 
 ## Note
 + All inputs have defualt values, so the pipeline can be run without addition arguments, however the subcommands `train` or `analyze` must included while running the steps of the pipeline.
-+ The repository includes an output file `results/results.txt` generated from a previous run of the pipeline. Running the pipeline again will overwrite this file unless a different output file is specified.
++ The repository includes two output files `results/results.txt` and `results/ranked_genes.txt` generated from a previous run of the pipeline. Running the pipeline again will overwrite these files unless a different output file is specified.
 
 
 # Usage and Options
