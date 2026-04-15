@@ -38,7 +38,7 @@ def main():
     train_parser = subparsers.add_parser("train",
                                          help="Train HMM")
     
-    train_parser.add_argument("--train_data",
+    train_parser.add_argument("--training_data",
                               type=str,
                               default="data/GCF_000001405.40_GRCh38.p14_cds_from_genomic.fna.gz",
                               help="Path to host sequence data file")
@@ -75,7 +75,7 @@ def main():
         # Initialize and train HMM model
         hmm = HMM()
         hmm.initialize_parameters()
-        hmm.train_emission_probs_from_fasta(args.train_data, args.max_codons)
+        hmm.train_emission_probs_from_fasta(args.training_data, args.max_codons)
 
         # Save trained model using pickle to avoid retraining for the same host data
         with open("hmm_model.pkl", "wb") as f:

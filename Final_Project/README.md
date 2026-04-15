@@ -72,7 +72,7 @@ From `Final_Project`, to train the HMM model run:
 python -m src.main train 
 ```
 Inputs (with defaults):
-+ Training data: Host coding sequences that you want to train the model on (default: `data/GCF_000001405.40_GRCh38.p14_cds_from_genomic.fna.gz`)
++ `training_data`: Host coding sequences that you want to train the model on (default: `data/GCF_000001405.40_GRCh38.p14_cds_from_genomic.fna.gz`)
 + `max_codons`: maximum number of codons to use for training (default: `None`)
 
 ### Analyze Viral Gene Data:
@@ -81,7 +81,7 @@ From `Final_Project`, to analyze viral data run:
 python -m src.main analyze
 ```
 Inputs (with defaults):
-+ Viral gene data: Gene sequences of virus that you want to score for adaptation (default: `data/influenza_A_genes.txt`)
++ `analysis_data`: Gene sequences of virus that you want to score for adaptation (default: `data/influenza_A_genes.txt`)
 + `num_paths`: number of top paths to return from the Viterbi algorithm (default: `2`)
 + `output_file`: output filename to store the scoring results of all the genes (default: `results/results.txt`)
 
