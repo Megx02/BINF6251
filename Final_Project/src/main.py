@@ -109,7 +109,7 @@ def main():
         # Store results to output file
         save_results(results, args.analysis_report)
 
-        print(f"Scoring results saved to {args.output_file}")
+        print(f"Scoring results saved to {args.analysis_report}")
 
         # Rank genes a write results to file
         write_genes_ranked_in_order(results, args.ranked_genes)

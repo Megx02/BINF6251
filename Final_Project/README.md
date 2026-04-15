@@ -26,7 +26,7 @@ Option 1: venv
 python3 -m venv venv
 
 # Activate environment
-source venv/bin.activate    # macOS/Linux
+source venv/bin/activate    # macOS/Linux
 venv\Scripts\activate       # Windows
 
 # Install dependencies
@@ -35,10 +35,10 @@ pip install -r requirements.txt
 Option 2: Conda
 ```
 # Create environment with Python
-conda create -n <name of environemnt> python=3.11
+conda create -n project_env python=3.11
 
 # Activate environment
-conda activate <name of environment>
+conda activate project_env
 
 # Install dependencies
 pip install -r requirements.txt
@@ -137,7 +137,9 @@ Average adaptation score: 0.873
 ```
 
 ### Notebook
-A notebook version of this project is available at `notebooks/main.ipynb`. This is a way to see the results without saving them in a file. The input data files are hardcoded in.
+A notebook version of this project is available at `notebooks/main.ipynb`. This is a way to view the results without saving them in a file. The input data files are hardcoded in the notebook.
+
+Note: To run the notebook, you may need Jupyter kernel support for your environment.
 
 ### Prototype Notebook
 
