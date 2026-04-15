@@ -1,4 +1,3 @@
-import pytest
 import math
 from src.viterbi import viterbi
 
