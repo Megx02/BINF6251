@@ -50,7 +50,7 @@ All required Python packages are listed in `requirements.txt`.
 
 Quick verification:
 ```
-python -c "import numpy, scipy, pytest; print('Setup OK')"
+python -c "import scipy, pytest; print('Setup OK')"
 ```
 
 
