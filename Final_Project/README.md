@@ -83,7 +83,7 @@ python -m src.main analyze
 Inputs (with defaults):
 + `analysis_data`: Path to file containing gene sequences of virus that you want to score for adaptation (default: `data/influenza_A_genes.txt`)
 + `num_paths`: number of top paths to return from the Viterbi algorithm (default: `2`)
-+ `output_file`: output filename to store the scoring results of all the genes (default: `results/results.txt`)
++ `analysis_report`: output filename to store the scoring results of all the genes (default: `results/results.txt`)
 + `ranked_genes`: Path to file to store ranked genes (default: `results/ranked_genes.txt`)
 
 ### Help:
