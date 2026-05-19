@@ -1,0 +1,30 @@
+Rank 1: lcl|LC660656.1_cds_BDC79442.1_1
+Average adaptation score: 0.898
+
+Rank 2: lcl|LC660658.1_cds_BDC79444.1_1
+Average adaptation score: 0.873
+
+Rank 3: lcl|LC660662.1_cds_BDC79449.1_2
+Average adaptation score: 0.848
+
+Rank 4: lcl|LC660663.1_cds_BDC79450.1_1
+Average adaptation score: 0.832
+
+Rank 5: lcl|LC660660.1_cds_BDC79446.1_1
+Average adaptation score: 0.824
+
+Rank 6: lcl|LC660657.1_cds_BDC79443.1_1
+Average adaptation score: 0.79
+
+Rank 7: lcl|LC660663.1_cds_BDC79451.1_2
+Average adaptation score: 0.732
+
+Rank 8: lcl|LC660659.1_cds_BDC79445.1_1
+Average adaptation score: 0.724
+
+Rank 9: lcl|LC660661.1_cds_BDC79447.1_1
+Average adaptation score: 0.701
+
+Rank 10: lcl|LC660662.1_cds_BDC79448.1_1
+Average adaptation score: 0.668
+
