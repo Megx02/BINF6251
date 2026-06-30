@@ -1,3 +1,4 @@
+# Host Codon Usage Adaptation Analysis in Viral Genes Using Hidden Markov Models
 # Project Overview
 This project investigates whether different genes of the Influenza A virus show varying levels of adaptation to human host codon usage. Since viruses depend on host translational machinery, codon usage bias may influence translation efficiency, so genes may adapt to host codon usage for better translation efficiency. 
 
